@@ -1,5 +1,5 @@
-import { generateTokenAndSetCookie } from "../lib/utils/generateToken";
-import User from "../models/user.model";
+import { generateTokenAndSetCookie } from "../lib/utils/generateToken.js";
+import User from "../models/user.model.js";
 import bcrypt from 'bcryptjs';
 
 export const signup = async (req, res) => {
@@ -31,6 +31,13 @@ export const signup = async (req, res) => {
             return res.status(400).json({ error: "Email is already taken" });
         }
 
+        // Verifying the length of password is greater or equal than 6
+
+        if (password.length < 6)
+        {
+            return res.status(400).json({ error: "Password must be at least 6 characters long" })
+        }
+
         // Hash password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
@@ -56,8 +63,8 @@ export const signup = async (req, res) => {
                 followers: newUser.followers,
                 following: newUser.following,
                 profileImg: newUser.profileImg,
-                coverImg: newUser.coverImg
-            })
+                coverImg: newUser.coverImg,
+            });
         }
         else
         {
@@ -73,9 +80,25 @@ export const signup = async (req, res) => {
 }
 
 export const login = async (req, res) => {
-    res.json({
-        data: "You hit the login endpoint"
-    });
+    try
+    {
+        const { username, password } = req.body;
+
+        const user = await User.findOne({ username });
+        const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
+
+        if (!user || !isPasswordCorrect)
+        {
+            return res.status(400).json({ error: "Invalid username or password" });
+        }
+        
+    }
+    catch (error)
+    {
+        console.log("Error in login controller", error.message);
+
+        res.status(500).json({ error: "Internal Server Error" });
+    }
 }
 
 export const logout = async (req, res) => {
