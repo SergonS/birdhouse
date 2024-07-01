@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 import XSvg from "../../../components/svgs/X";
+import smiley from "../../../components/photos/smiley.png";
 
 import { MdOutlineMail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
@@ -10,8 +11,8 @@ import { MdDriveFileRenameOutline } from "react-icons/md";
 
 const SignUpPage = () => {
 	const [formData, setFormData] = useState({
-		email: "",
 		username: "",
+		email: "",
 		fullName: "",
 		password: "",
 	});
@@ -30,23 +31,12 @@ const SignUpPage = () => {
 	return (
 		<div className='max-w-screen-xl mx-auto flex h-screen px-10'>
 			<div className='flex-1 hidden lg:flex items-center  justify-center'>
-				<XSvg className=' lg:w-2/3 fill-white' />
+				<img className="lg:w-2/3" src={smiley} />
 			</div>
 			<div className='flex-1 flex flex-col justify-center items-center'>
 				<form className='lg:w-2/3  mx-auto md:mx-20 flex gap-4 flex-col' onSubmit={handleSubmit}>
-					<XSvg className='w-24 lg:hidden fill-white' />
-					<h1 className='text-4xl font-extrabold text-white'>Join today.</h1>
-					<label className='input input-bordered rounded flex items-center gap-2'>
-						<MdOutlineMail />
-						<input
-							type='email'
-							className='grow'
-							placeholder='Email'
-							name='email'
-							onChange={handleInputChange}
-							value={formData.email}
-						/>
-					</label>
+					<img className="w-24 lg:hidden" src={smiley}/>
+					<h1 className='text-4xl font-extrabold text-white'>Join today.</h1>					
 					<div className='flex gap-4 flex-wrap'>
 						<label className='input input-bordered rounded flex items-center gap-2 flex-1'>
 							<FaUser />
@@ -58,6 +48,17 @@ const SignUpPage = () => {
 								onChange={handleInputChange}
 								value={formData.username}
 							/>
+						</label>
+						<label className='input input-bordered rounded flex items-center gap-2 flex-1'>
+						<MdOutlineMail />
+						<input
+							type='email'
+							className='grow'
+							placeholder='Email'
+							name='email'
+							onChange={handleInputChange}
+							value={formData.email}
+						/>
 						</label>
 						<label className='input input-bordered rounded flex items-center gap-2 flex-1'>
 							<MdDriveFileRenameOutline />
