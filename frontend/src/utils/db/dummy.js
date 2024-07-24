@@ -5,7 +5,7 @@ export const POSTS = [
 		img: "/posts/champs.png",
 		user: {
 			username: "messi",
-			profileImg: "/avatars/messi.png",
+			profileImg: "/../../public/avatars/messi.png",
 			fullName: "Leo Messi",
 		},
 		comments: [
