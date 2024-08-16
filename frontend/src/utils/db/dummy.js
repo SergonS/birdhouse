@@ -2,7 +2,7 @@ export const POSTS = [
 	{
 		_id: "1",
 		text: "¡Muchas gracias por todos los saludos y felicitaciones!! 😃 Otro año que coincide mi cumple estando con la Selección… Así que festejando un poco nomás y seguimos preparándonos para nuestro próximo partido. ¡Abrazos!",
-		img: "/posts/champs.png",
+		img: "../../public/posts/champs.png",
 		user: {
 			username: "messi",
 			profileImg: "/../../public/avatars/messi.png",
@@ -14,7 +14,7 @@ export const POSTS = [
 				text: "GOAT",
 				user: {
 					username: "korra",
-					profileImg: "/avatars/korra.png",
+					profileImg: "/../../public/avatars/korra.jpg",
 					fullName: "Korra",
 				},
 			},
@@ -26,7 +26,7 @@ export const POSTS = [
 		text: "How you guys doing? 😊",
 		user: {
 			username: "messi",
-			profileImg: "/avatars/messi.png",
+			profileImg: "/../../public/avatars/messi.png",
 			fullName: "Leo Messi",
 		},
 		comments: [
@@ -35,7 +35,7 @@ export const POSTS = [
 				text: "Best in the world",
 				user: {
 					username: "korra",
-					profileImg: "/avatars/korra.png",
+					profileImg: "/../../public/avatars/korra.png",
 					fullName: "Korra",
 				},
 			},
@@ -45,10 +45,10 @@ export const POSTS = [
 	{
 		_id: "3",
 		text: "Primer paso.",
-		img: "/posts/paso.png",
+		img: "../../public/posts/paso.png",
 		user: {
 			username: "messi",
-			profileImg: "/avatars/messi.png",
+			profileImg: "/../../public/avatars/messi.png",
 			fullName: "Leo Messi",
 		},
 		comments: [],
@@ -57,10 +57,10 @@ export const POSTS = [
 	{
 		_id: "4",
 		text: "Eu Quero Tchuuuuu <3",
-		img: "/posts/duo.png",
+		img: "../../public/posts/duo.png",
 		user: {
 			username: "yamal",
-			profileImg: "/avatars/yamal.png",
+			profileImg: "/../../public/avatars/yamal.png",
 			fullName: "Lamine Yamal",
 		},
 		comments: [
@@ -69,7 +69,7 @@ export const POSTS = [
 				text: "Great game!",
 				user: {
 					username: "korra",
-					profileImg: "/avatars/korra.png",
+					profileImg: "/../../public/avatars/korra.png",
 					fullName: "Korra",
 				},
 			},
@@ -93,24 +93,24 @@ export const USERS_FOR_RIGHT_PANEL = [
 		_id: "1",
 		fullName: "Leo Messi",
 		username: "messi",
-		profileImg: "/avatars/messi.png",
+		profileImg: "/../../public/avatars/messi.png",
 	},
 	{
 		_id: "2",
 		fullName: "Lamine Yamal",
 		username: "yamal",
-		profileImg: "/avatars/yamal.png",
+		profileImg: "/../../public/avatars/yamal.png",
 	},
 	{
 		_id: "3",
 		fullName: "Aang",
 		username: "aang",
-		profileImg: "/avatars/aang.png",
+		profileImg: "/../../public/avatars/aang.jpg",
 	},
 	{
 		_id: "4",
 		fullName: "Korra",
 		username: "korra",
-		profileImg: "/avatars/korra.png",
+		profileImg: "/../../public/avatars/korra.jpg",
 	},
 ];
