@@ -1,3 +1,4 @@
+// ICONS
 import { CiImageOn } from "react-icons/ci";
 import { BsEmojiSmileFill } from "react-icons/bs";
 import { useRef, useState } from "react";
@@ -12,15 +13,18 @@ const CreatePost = () => {
 	const isPending = false;
 	const isError = false;
 
+	// Retaining personal data
 	const data = {
 		profileImg: "/avatars/aang.jpg",
 	};
 
+	// Submit
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		alert("Post created successfully");
 	};
 
+	// Change the image to a new selected image
 	const handleImgChange = (e) => {
 		const file = e.target.files[0];
 		if (file) {
