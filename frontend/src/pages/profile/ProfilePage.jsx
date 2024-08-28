@@ -27,10 +27,10 @@ const ProfilePage = () => {
 		_id: "1",
 		fullName: "Avatar Aang",
 		username: "aang",
-		profileImg: "/../../public/avatars/aang.jpg",
-		coverImg: "/../../public/cover.jpg",
+		profileImg: "/avatars/aang.jpg",
+		coverImg: "/cover.jpg",
 		bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-		link: "https://youtube.com/@asaprogrammer_",
+		link: "https://youtube.com/fds",
 		following: ["1", "2", "3"],
 		followers: ["1", "2", "3"],
 	};
@@ -143,12 +143,12 @@ const ProfilePage = () => {
 											<>
 												<FaLink className='w-3 h-3 text-slate-500' />
 												<a
-													href='https://youtube.com/@asaprogrammer_'
+													href='https://youtube.com/'
 													target='_blank'
 													rel='noreferrer'
 													className='text-sm text-blue-500 hover:underline'
 												>
-													youtube.com/@asaprogrammer_
+													youtube.com/
 												</a>
 											</>
 										</div>
