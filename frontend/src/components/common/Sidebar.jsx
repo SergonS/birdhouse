@@ -14,6 +14,35 @@ import toast from 'react-hot-toast';
 
 const Sidebar = () => {
 
+	const { mutate: logout } = useMutation({
+		mutationFn: async() => {
+			try
+			{
+				// Post
+				const res = await fetch("/api/auth/logout", {
+					method: "POST"				
+				});
+
+				// Receiving response
+				const data = await res.json();
+
+				// Check for errors
+				if (!res.ok)
+				{
+					throw new Error(data.error || "Unable to logout");
+				}
+			}
+			catch (error)
+			{
+				console.error(error);
+				throw error;
+			}
+		},
+		onSuccess: () => {
+			toast.success("Logout successful");
+		}
+	})
+
 	const data = {
 		fullName: "Aang",
 		username: "aang",
@@ -71,7 +100,11 @@ const Sidebar = () => {
 								<p className='text-white font-bold text-sm w-20 truncate'>{data?.fullName}</p>
 								<p className='text-slate-500 text-sm'>@{data?.username}</p>
 							</div>
-							<BiLogOut className='w-5 h-5 cursor-pointer' />
+							<BiLogOut className='w-5 h-5 cursor-pointer' 
+							onClick={(e) => {
+								e.preventDefault();
+								logout();
+							}}/>
 						</div>
 					</Link>
 				)}

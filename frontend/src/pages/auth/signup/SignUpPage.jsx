@@ -16,7 +16,7 @@ import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
 const SignUpPage = () => {
-	
+
 	const [formData, setFormData] = useState({
 		username: "",
 		email: "",
@@ -24,7 +24,7 @@ const SignUpPage = () => {
 		password: "",
 	});
 	
-	const { mutate: signupMutation, isPending, isError, error } = useMutation({
+	const { mutate: signup, isPending, isError, error } = useMutation({
 		mutationFn: async({ username, email, fullName, password }) => {
 			try
 			{
@@ -63,7 +63,7 @@ const SignUpPage = () => {
 		// Avoid page refresh
 		e.preventDefault();
 		// Submitting form
-		signupMutation(formData);
+		signup(formData);
 	};
 
 	const handleInputChange = (e) => {

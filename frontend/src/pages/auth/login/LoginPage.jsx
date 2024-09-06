@@ -14,13 +14,13 @@ import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
 const LoginPage = () => {
-	
+
 	const [formData, setFormData] = useState({
 		username: "",
 		password: "",
 	});
 
-	const { mutate: loginMutation, isPending, isError, error } = useMutation({
+	const { mutate: login, isPending, isError, error } = useMutation({
 		mutationFn: async({ username, password }) => {
 			try
 			{
@@ -59,13 +59,12 @@ const LoginPage = () => {
 		// Avoid page refresh
 		e.preventDefault();
 		// Submitting form
-		loginMutation(formData);
+		login(formData);
 	};
 
 	const handleInputChange = (e) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
-
 
 	return (
 		<div className='max-w-screen-xl mx-auto flex h-screen'>
