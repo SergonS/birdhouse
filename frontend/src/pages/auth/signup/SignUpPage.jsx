@@ -23,10 +23,11 @@ const SignUpPage = () => {
 		password: "",
 	});
 	
-	const { mutate, isError, isPending, error} = useMutation({
+	const { mutate, isError, isPending, error } = useMutation({
 		mutationFn: async({ username, email, fullName, password }) => {
 			try
 			{
+				// Post
 				const res = await fetch("/api/auth/signup", {
 					method: "POST",
 					headers: {
@@ -35,14 +36,14 @@ const SignUpPage = () => {
 					body: JSON.stringify({ username, email, fullName, password })
 				});
 
+				// Receiving response
 				const data = await res.json();
 
+				// Check for errors
 				if (!res.ok)
 				{
 					throw new Error(data.error || "Failed to create account");
 				}				
-
-				console.log(data);
 
 				return data;
 			}
