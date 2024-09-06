@@ -1,15 +1,15 @@
+// React
 import { Link } from "react-router-dom";
-
 // Hooks
 import { useState } from "react";
-// Media
-import XSvg from "../../../components/svgs/X";
-import smiley from "../../../components/photos/smiley.png";
 // Icons
 import { MdOutlineMail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { MdPassword } from "react-icons/md";
 import { MdDriveFileRenameOutline } from "react-icons/md";
+// Media
+import smiley from "../../../components/photos/smiley.png";
+import XSvg from "../../../components/svgs/X";
 // Tanstack
 import { useMutation } from '@tanstack/react-query';
 // Toast
@@ -22,7 +22,7 @@ const SignUpPage = () => {
 		fullName: "",
 		password: "",
 	});
-
+	
 	const { mutate, isError, isPending, error} = useMutation({
 		mutationFn: async({ username, email, fullName, password }) => {
 			try
@@ -134,4 +134,5 @@ const SignUpPage = () => {
 		</div>
 	);
 };
+
 export default SignUpPage;
