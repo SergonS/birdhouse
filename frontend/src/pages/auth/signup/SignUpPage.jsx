@@ -23,7 +23,7 @@ const SignUpPage = () => {
 		password: "",
 	});
 	
-	const { mutate, isPending, isError, error } = useMutation({
+	const { mutate: signupMutation, isPending, isError, error } = useMutation({
 		mutationFn: async({ username, email, fullName, password }) => {
 			try
 			{
@@ -62,7 +62,7 @@ const SignUpPage = () => {
 		// Avoid page refresh
 		e.preventDefault();
 		// Submitting form
-		mutate(formData);
+		signupMutation(formData);
 	};
 
 	const handleInputChange = (e) => {
