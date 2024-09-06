@@ -23,7 +23,7 @@ const SignUpPage = () => {
 		password: "",
 	});
 	
-	const { mutate, isError, isPending, error } = useMutation({
+	const { mutate, isPending, isError, error } = useMutation({
 		mutationFn: async({ username, email, fullName, password }) => {
 			try
 			{
