@@ -1,14 +1,19 @@
-import XSvg from "../svgs/X";
-
-import { MdHomeFilled } from "react-icons/md";
-import { IoNotifications } from "react-icons/io5";
-import { FaUser } from "react-icons/fa";
+// React
 import { Link } from "react-router-dom";
+// Icons
 import { BiLogOut } from "react-icons/bi";
-
+import { FaUser } from "react-icons/fa";
+import { IoNotifications } from "react-icons/io5";
+import { MdHomeFilled } from "react-icons/md";
+// Media
 import smiley from "../photos/smiley.png";
+// Tanstack
+import { useMutation } from '@tanstack/react-query';
+// Toast
+import toast from 'react-hot-toast';
 
 const Sidebar = () => {
+
 	const data = {
 		fullName: "Aang",
 		username: "aang",
