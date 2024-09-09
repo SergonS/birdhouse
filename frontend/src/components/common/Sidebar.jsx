@@ -40,6 +40,9 @@ const Sidebar = () => {
 		},
 		onSuccess: () => {
 			toast.success("Logout successful");
+		},
+		onError: () => {
+			toast.error("Logout failed");
 		}
 	})
 
