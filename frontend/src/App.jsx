@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 // Pages
 import HomePage from './pages/home/HomePage.jsx'
@@ -9,25 +9,66 @@ import ProfilePage from './pages/profile/ProfilePage.jsx';
 // Components
 import Sidebar from './components/common/Sidebar.jsx';
 import RightPanel from './components/common/RightPanel.jsx';
+import LoadingSpinner from './components/common/LoadingSpinner.jsx';
+// Tanstack
+import { useQuery } from '@tanstack/react-query';
 // Toast
 import { Toaster } from 'react-hot-toast';
 
-function App() {
+function App() 
+{
+  const { data: authUser, isLoading } = useQuery({
+    queryKey: ['authUser'],
+    queryFn: async() => {
+      try
+      {
+        // Get
+        const res = await fetch("/api/auth/me");
+
+        // Receiving respones
+        const data = await res.json();
+
+        // Check for errors
+        if (!res.ok)
+        {
+          throw new Error(data.error || "Something went wrong");
+        }
+
+        console.log("authUser is here: ", data);
+        return data;
+      }
+      catch (error)
+      {
+        throw new Error(error);
+      }
+    },
+    retry : false,
+  });
+
+  if (isLoading)
+  {
+    return (
+      <div className='h-screen flex justify-center items-center'>
+        <LoadingSpinner size='lg' />
+      </div>
+    )
+  }
+
   return (
     <div className='flex max-w-6xl mx-auto'>
       {/* Common component*/}
       <Sidebar />
       <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/signup' element={<SignUpPage />} />
-        <Route path='/notifications' element={<NotificationPage />} />
-        <Route path='/profile/:username' element={<ProfilePage />} />
+        <Route path='/' element={authUser ? <HomePage /> : <Navigate to='/login' />} />
+        <Route path='/login' element={!authUser ? <LoginPage /> : <Navigate to='/' />} />
+        <Route path='/signup' element={!authUser ? <SignUpPage /> : <Navigate to='/' />} />
+        <Route path='/notifications' element={authUser ? <NotificationPage /> : <Navigate to='/login' />} />
+        <Route path='/profile/:username' element={authUser ? <ProfilePage /> : <Navigate to='/login' />} />
       </Routes>
       <RightPanel />
       <Toaster />
     </div>
   );
-}
+};
 
-export default App
+export default App;
