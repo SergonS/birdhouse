@@ -9,7 +9,7 @@ import { MdPassword } from "react-icons/md";
 // Media
 import XSvg from "../../../components/svgs/X";
 // Tanstack
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 // Toast
 import toast from 'react-hot-toast';
 
@@ -19,6 +19,8 @@ const LoginPage = () => {
 		username: "",
 		password: "",
 	});
+
+	const queryClient = useQueryClient();
 
 	const { mutate: login, isPending, isError, error } = useMutation({
 		mutationFn: async({ username, password }) => {
@@ -51,7 +53,8 @@ const LoginPage = () => {
 			}
 		},
 		onSuccess: () => {
-			toast.success("Login successful")
+			// Refetch authUser
+			queryClient.invalidateQueries({ queryKey: ["authUser"] });
 		},
 	});
 

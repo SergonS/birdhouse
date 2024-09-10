@@ -28,6 +28,12 @@ function App()
         // Receiving respones
         const data = await res.json();
 
+        // Verify if user is unauthorized
+        if (data.error)
+        { 
+          return null;
+        }
+
         // Check for errors
         if (!res.ok)
         {
@@ -57,7 +63,7 @@ function App()
   return (
     <div className='flex max-w-6xl mx-auto'>
       {/* Common component*/}
-      <Sidebar />
+      {authUser && <Sidebar />}
       <Routes>
         <Route path='/' element={authUser ? <HomePage /> : <Navigate to='/login' />} />
         <Route path='/login' element={!authUser ? <LoginPage /> : <Navigate to='/' />} />
@@ -65,7 +71,7 @@ function App()
         <Route path='/notifications' element={authUser ? <NotificationPage /> : <Navigate to='/login' />} />
         <Route path='/profile/:username' element={authUser ? <ProfilePage /> : <Navigate to='/login' />} />
       </Routes>
-      <RightPanel />
+      {authUser && <RightPanel />}
       <Toaster />
     </div>
   );
