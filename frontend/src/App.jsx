@@ -25,7 +25,7 @@ function App()
         // Get
         const res = await fetch("/api/auth/me");
 
-        // Receiving respones
+        // Receiving response
         const data = await res.json();
 
         // Verify if user is unauthorized

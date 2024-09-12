@@ -11,7 +11,6 @@ import smiley from "../photos/smiley.png";
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 // Toast
 import toast from 'react-hot-toast';
-import XSvg from "../svgs/X";
 
 const Sidebar = () => {
 
