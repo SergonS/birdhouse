@@ -1,23 +1,76 @@
-import { FaRegComment } from "react-icons/fa";
-import { BiRepost } from "react-icons/bi";
-import { FaRegHeart } from "react-icons/fa";
-import { FaRegBookmark } from "react-icons/fa6";
-import { FaTrash } from "react-icons/fa";
-import { useState } from "react";
+// React
 import { Link } from "react-router-dom";
+// Hooks
+import { useState } from "react";
+// Components
+import LoadingSpinner from "./LoadingSpinner";
+// Icons
+import { BiRepost } from "react-icons/bi";
+import { FaRegBookmark } from "react-icons/fa6";
+import { FaRegComment } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
+// Tanstack
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+// Toast
+import toast from "react-hot-toast";
 
 const Post = ({ post }) => {
+
 	const [comment, setComment] = useState("");
+
+	const queryClient = useQueryClient();
+
+	// Fetching from previously declared query authUser
+	const { data: authUser } = useQuery({ queryKey: ['authUser'] });
+
+	// Delete post 
+	const { mutate: deletePost, isPending } = useMutation({
+		mutationFn: async() => {
+			try
+			{
+				// Delete
+				const res = await fetch(`/api/posts/${post._id}`, {
+					method: "DELETE"
+				});
+
+				// Receiving response
+				const data = await res.json();
+
+				// Check for errors
+				if (!res.ok)
+				{
+					throw new Error(data.error || "Failed to delete post");
+				}
+
+				return data;
+			}
+			catch (error)
+			{
+				throw new Error(error);
+			}
+		},
+		onSuccess: () => {
+			toast.success("Post deleted successfully");
+
+			// Invalidate query to refetch post
+			queryClient.invalidateQueries({ queryKey: ["posts"] });
+		}
+	});
+
 	const postOwner = post.user;
+
 	const isLiked = false;
 
-	const isMyPost = true;
+	const isMyPost = authUser._id === post.user._id;
 
 	const formattedDate = "1h";
 
 	const isCommenting = false;
 
-	const handleDeletePost = () => {};
+	const handleDeletePost = () => {
+		deletePost();
+	};
 
 	const handlePostComment = (e) => {
 		e.preventDefault();
@@ -30,7 +83,7 @@ const Post = ({ post }) => {
 			<div className='flex gap-2 items-start p-4 border-b border-gray-700'>
 				<div className='avatar'>
 					<Link to={`/profile/${postOwner.username}`} className='w-8 rounded-full overflow-hidden'>
-						<img src={postOwner.profileImg || "/avatar-placeholder.png"} />
+						<img src={postOwner.profileImg || "/avatar_placeholder.png"} />
 					</Link>
 				</div>
 				<div className='flex flex-col flex-1'>
@@ -45,7 +98,10 @@ const Post = ({ post }) => {
 						</span>
 						{isMyPost && (
 							<span className='flex justify-end flex-1'>
-								<FaTrash className='cursor-pointer hover:text-red-500' onClick={handleDeletePost} />
+								{!isPending && <FaTrash className='cursor-pointer hover:text-red-500' onClick={handleDeletePost} />}
+								{isPending && (
+									<LoadingSpinner size='sm'></LoadingSpinner>
+								)}
 							</span>
 						)}
 					</div>

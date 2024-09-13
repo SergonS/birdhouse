@@ -1,9 +1,11 @@
+// Hooks
 import { useState } from "react";
-
+// Components
 import Posts from "../../components/common/Posts";
 import CreatePost from "./CreatePost";
 
 const HomePage = () => {
+
 	const [feedType, setFeedType] = useState("forYou");
 
 	return (
@@ -42,4 +44,5 @@ const HomePage = () => {
 		</>
 	);
 };
+
 export default HomePage;

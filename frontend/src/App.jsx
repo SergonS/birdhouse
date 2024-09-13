@@ -1,5 +1,5 @@
+// React
 import { Navigate, Route, Routes } from 'react-router-dom';
-
 // Pages
 import HomePage from './pages/home/HomePage.jsx'
 import LoginPage from './pages/auth/login/LoginPage.jsx';
